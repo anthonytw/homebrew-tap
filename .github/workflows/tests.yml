@@ -1,0 +1,73 @@
+name: tests
+
+# Style for the whole tap, then audit + install + test for each changed formula
+# (every formula on a manual run). No bottles: formulae here install release binaries
+# or build from source.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: 1
+  HOMEBREW_NO_INSTALL_FROM_API: 1
+  HOMEBREW_NO_ANALYTICS: 1
+
+jobs:
+  changed:
+    name: Changed formulae
+    runs-on: ubuntu-latest
+    outputs:
+      formulae: ${{ steps.list.outputs.formulae }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: list
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ "${{ github.event_name }}" = workflow_dispatch ] || [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            files=$(ls Formula/*.rb 2>/dev/null || true)
+          else
+            files=$(git diff --name-only --diff-filter=AM "$BASE" HEAD -- 'Formula/*.rb')
+          fi
+          names=$(for f in $files; do basename "$f" .rb; done | jq -R . | jq -sc .)
+          echo "formulae=$names" >> "$GITHUB_OUTPUT"
+          echo "changed: $names"
+
+  style:
+    name: brew style
+    runs-on: ubuntu-latest
+    steps:
+      - id: brew
+        uses: Homebrew/actions/setup-homebrew@main
+      - run: brew style anthonytw/tap
+
+  formula:
+    name: ${{ matrix.formula }} (${{ matrix.os }})
+    needs: changed
+    if: needs.changed.outputs.formulae != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        formula: ${{ fromJSON(needs.changed.outputs.formulae) }}
+        os: [macos-latest, ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - id: brew
+        uses: Homebrew/actions/setup-homebrew@main
+      - name: Audit
+        run: brew audit --strict --online --formula anthonytw/tap/${{ matrix.formula }}
+      - name: Install
+        run: brew install --verbose --formula anthonytw/tap/${{ matrix.formula }}
+      - name: Test
+        run: brew test --verbose anthonytw/tap/${{ matrix.formula }}
