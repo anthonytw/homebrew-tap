@@ -28,7 +28,7 @@ jobs:
     outputs:
       formulae: ${{ steps.list.outputs.formulae }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
       - id: list
@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: brew
-        uses: Homebrew/actions/setup-homebrew@main
+        uses: Homebrew/actions/setup-homebrew@1fc4b1bd23e4bd625dc35df612f539122fc51a81 # main, 2026-11-06
       - run: brew style anthonytw/tap
 
   formula:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - id: brew
-        uses: Homebrew/actions/setup-homebrew@main
+        uses: Homebrew/actions/setup-homebrew@1fc4b1bd23e4bd625dc35df612f539122fc51a81 # main, 2026-11-06
       - name: Audit
         run: brew audit --strict --online --formula anthonytw/tap/${{ matrix.formula }}
       - name: Install
