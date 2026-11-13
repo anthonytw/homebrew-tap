@@ -6,18 +6,18 @@ class Fil < Formula
   desc "Remote shell for development over SSH that keeps your place"
   homepage "https://github.com/anthonytw/fil"
   # macOS: the universal archive. (Homebrew does not allow url in on_macos; Linux overrides it.)
-  url "https://github.com/anthonytw/fil/releases/download/v0.1.0/fil-0.1.0-universal-apple-darwin.tar.gz"
-  sha256 "7103808e9e3b4067090542f6b00daddbad5fc413ef477849462939a706dc8edb"
+  url "https://github.com/anthonytw/fil/releases/download/v0.2.0/fil-0.2.0-universal-apple-darwin.tar.gz"
+  sha256 "04d2dc81c3ba3c8e5622ed1bd4ef380b8eb2fb4b6cfd7c8140984865376b649b"
   license "GPL-3.0-or-later"
 
   on_linux do
     on_intel do
-      url "https://github.com/anthonytw/fil/releases/download/v0.1.0/fil-0.1.0-x86_64-linux-musl.tar.gz"
-      sha256 "646ad47cd0df3e6526b7140b37b971b3895f0ab760c4097d9e6f4ccb212fca88"
+      url "https://github.com/anthonytw/fil/releases/download/v0.2.0/fil-0.2.0-x86_64-linux-musl.tar.gz"
+      sha256 "2216aa38df17d33cbe548f6dbea031ec49f88c265d6d896a8cc47d0e3fc39516"
     end
     on_arm do
-      url "https://github.com/anthonytw/fil/releases/download/v0.1.0/fil-0.1.0-aarch64-linux-musl.tar.gz"
-      sha256 "25ab46e63f0bbf2108eec5531358981c886c7c8631dadcaa44996d23fbb695f3"
+      url "https://github.com/anthonytw/fil/releases/download/v0.2.0/fil-0.2.0-aarch64-linux-musl.tar.gz"
+      sha256 "2a8c9f9c89d27d605ab557a25da6196f21ad473cc57edffa7bd2452aec98e204"
     end
   end
 
