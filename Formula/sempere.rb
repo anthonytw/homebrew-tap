@@ -13,23 +13,23 @@ class Sempere < Formula
     # One universal (arm64 + x86_64) binary for both. `brew style` allows url/sha256 only
     # inside on_arm/on_intel, not directly in on_macos.
     on_arm do
-      url "https://github.com/anthonytw/sempere/releases/download/v1.0.0/sempere-1.0.0-macos-universal.tar.gz"
-      sha256 "3d584844ff8275b274b76a23dd16db6afb582f80cbdd770ea22b2a3dccf9b532"
+      url "https://github.com/anthonytw/sempere/releases/download/v1.1.0/sempere-1.1.0-macos-universal.tar.gz"
+      sha256 "c0099b21db67ece5ca2cfb3e50040c470de7b953f9c142d4e7631b42712de6a7"
     end
     on_intel do
-      url "https://github.com/anthonytw/sempere/releases/download/v1.0.0/sempere-1.0.0-macos-universal.tar.gz"
-      sha256 "3d584844ff8275b274b76a23dd16db6afb582f80cbdd770ea22b2a3dccf9b532"
+      url "https://github.com/anthonytw/sempere/releases/download/v1.1.0/sempere-1.1.0-macos-universal.tar.gz"
+      sha256 "c0099b21db67ece5ca2cfb3e50040c470de7b953f9c142d4e7631b42712de6a7"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/anthonytw/sempere/releases/download/v1.0.0/sempere-1.0.0-linux-aarch64.tar.gz"
-      sha256 "b313f26b4c83162c8445b955d691596ca8935c6498813b67e154b9bffc5005cc"
+      url "https://github.com/anthonytw/sempere/releases/download/v1.1.0/sempere-1.1.0-linux-aarch64.tar.gz"
+      sha256 "614ac576c3e0d5482218bca66e32ccbee336a7a45423913b077bae6282751763"
     end
     on_intel do
-      url "https://github.com/anthonytw/sempere/releases/download/v1.0.0/sempere-1.0.0-linux-x86_64.tar.gz"
-      sha256 "c10a76022326469b6f292e583cc942b001ba460eacda79b98cbdf1137c07f9a2"
+      url "https://github.com/anthonytw/sempere/releases/download/v1.1.0/sempere-1.1.0-linux-x86_64.tar.gz"
+      sha256 "8989aed5900a7556ee47fadaed8261240ab47d41dc9bd5b374f7a8f93f5682ec"
     end
   end
 
